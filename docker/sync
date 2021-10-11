@@ -35,9 +35,9 @@ def skiller_whale_sync():
     sync_thread.start()
 
     with OUTPUT_LOCK:
-        print("Open a separate terminal window,  and run the command below")
+        print("Open a separate terminal window, and run the command below")
         print("to open a new shell inside the docker container:")
-        print("    docker-compose exec watcher sh")
+        print("    docker-compose exec typescript sh")
         print("")
         print("In this shell, cd into the directory for this session by running:")
         print("    cd <directory-name>")
