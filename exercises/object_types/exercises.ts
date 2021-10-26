@@ -4,7 +4,7 @@ print({ name: 'tomatoes', quantity: 800, measurement: 'grams' }, 1)
 print({ name: 'basil', quantity: 5, measurement: 'leaves' }, 1)
 
 // Prints an ingredient to the console. Returns a string containing
-// number of servings.
+// the number of servings.
 function print (ingredient: any, servings: number): string {
   ingredient.quantity = ingredient.quantity * servings
 
