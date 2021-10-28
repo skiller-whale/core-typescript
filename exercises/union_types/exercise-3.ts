@@ -1,19 +1,7 @@
 // @ts-nocheck
-/*
-  |  * Remove the `//@ts-nocheck` flag from the top of this file so `tsc` can check the code.
-  |
-  |  * Define a literal union type for `ChosenAreaCodes` by looking at the information in the `filter` function.
-  |
-  |  * Use the literal union you just created in all of the appropriate places, including the parameter / return types of the function signatures,
-  |      variable declaration and anonymous function parameters.
-  |
-  |  * Note: `createHeatMap` has a return type of `any` and the variable `map` also has type `any`.
-  |       These should remain as `any` but the paramater type `any` inside the `forEach` function should be changed.
-*/
-
 import usersWithGoldSubscriptions from './users'
 
-type User = { firstname: string, areaCode: number }
+type User = { name: string, areaCode: number }
 
 let users: User[] = usersWithGoldSubscriptions
 
