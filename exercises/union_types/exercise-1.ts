@@ -10,7 +10,7 @@ function generateSubscriptionDetails () {
 
 function addSubscriptionDetails (person: { name: string }, signedUp: boolean): any {
   if (signedUp) {
-    let { subscriptionLevel, emailConsent } = generateSubscriptionDetails()
+    const { subscriptionLevel, emailConsent } = generateSubscriptionDetails()
     return { name: person.name, isSubscribed: true, subscriptionLevel, emailConsent }
   } else {
     return { name: person.name, isSubscribed: false }
