@@ -39,4 +39,4 @@ function processInvoices (minimumCostCutOff: number): void {
   }
 }
 
-processInvoices(200)
+processInvoices(450)
