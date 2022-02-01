@@ -1,30 +1,14 @@
-import usersWithGoldSubscriptions from './users'
+// empty export to ensure the compiler treats this file as a module
+export {}
 
-type User = { name: string, areaCode: number }
+type Subscriber = { name: string, subscriptionType: string }
 
-let users: User[] = usersWithGoldSubscriptions
+type Admin = { name: string, superAdmin: boolean }
 
-// Define a literal union type for `ChosenAreaCode` here
+type User = Subscriber | Admin
 
-function filter (data: User[]) {
-  const allAreaCodes: number[] = data.map(user => user.areaCode)
+const hybrid = {}
 
-  const filtered: number[] = []
-  for (const areaCode of allAreaCodes) {
-    if (areaCode === 44 || areaCode === 91 || areaCode === 52 || areaCode === 33) {
-      filtered.push(areaCode)
-    }
-  }
-
-  return filtered
-}
-
-function createHeatMap (data: number[]): any {
-  const map: any = {}
-  data.forEach((x: any) => { map[x] = (map[x] || 0) + 1 })
-  return map
-}
-
-const filteredAreaCodes = filter(users)
-
-console.log(createHeatMap(filteredAreaCodes))
+const subscriber = hybrid
+const admin = hybrid
+const user = hybrid
