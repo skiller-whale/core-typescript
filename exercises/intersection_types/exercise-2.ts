@@ -1,10 +1,5 @@
 export default {} // empty export to ensure the compiler treats this file as a module
 
-type Price = {
-  amount: number,
-  currency: string
-}
-
 type BookReview = {
   title: string,
   author: string,
@@ -25,17 +20,13 @@ type BookOrder = {
   title: string,
   author: string,
   isbn: number,
-  price: Price,
   quantity: number
 }
 
-type AlbumForSale = {
-  title: string,
-  artist: string,
-  isrc: string,
-  price: Price
-}
-
+// ------------------------------------------------------------------------- //
+// Don't edit the code below here - this is for testing your types still     //
+// work after refactoring.                                                   //
+// ------------------------------------------------------------------------- //
 const bookReview: BookReview = {
   title: 'The Old Man and the Sea',
   author: 'Ernest Herringway',
@@ -56,13 +47,5 @@ const bookOrder: BookOrder = {
   title: 'The Old Man and the Sea',
   author: 'Ernest Herringway',
   isbn: 9787201046440,
-  price: { amount: 10.99, currency: '$' },
   quantity: 4
-}
-
-const albumForSale: AlbumForSale = {
-  title: 'Alas, I Cannot Swim',
-  artist: 'Laura Marlin',
-  isrc: 'UK-PAR-08-83647',
-  price: { amount: 3.99, currency: '£' }
 }

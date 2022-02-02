@@ -1,36 +1,62 @@
 export default {} // empty export to ensure the compiler treats this file as a module
 
-type BookReview = {
+// ------------------------------------------------------------------------- //
+// Don't modify these types                                                  //
+// ------------------------------------------------------------------------- //
+type Book = {
   title: string,
   author: string,
-  isbn: number,
-  rating: number,
-  comments: string
+  genre: 'Fantasy' | 'Romance' | 'Dystopian' | 'Contemporary'
 }
 
-type AlbumReview = {
+type Film = {
   title: string,
-  artist: string,
-  rating: number,
+  director: string,
+  genre: 'Action' | 'Comedy' | 'Fantasy'  | 'Romance'
+  rating: 'U' | 'PG' | 12 | 16 | 18
+}
+
+type Review = {
+  rating: 1 | 2 | 3 | 4 | 5,
   comments: string
 }
 
-type Review = BookReview | AlbumReview
-
-function getHighestRating (reviews: Review[]): number {
-  let highestRating = 0
-  for (const review of reviews) {
-    if (review.rating > highestRating) {
-      highestRating = review.rating
-    }
-  }
-  return highestRating
+type BookSeries = {
+  title: string,
+  entries: Book[]
 }
 
-function reviewToHTML (review: Review): string {
-  return `
-    <h2>${review.title}</h2>
-    <p>Rating: ${review.rating}</p>
-    <p>${review.comments}</p>
-  `
+type FilmSeries = {
+  title: string,
+  entries: Film[]
 }
+
+// ------------------------------------------------------------------------- //
+// You can use these values in your answers (if you want)                    //
+// ------------------------------------------------------------------------- //
+const seriesTitle = 'Herring Potter'
+
+const book: Book = {
+  title: 'Herring Potter and the Philosopher\'s Stone',
+  author: 'J K Rowling',
+  genre: 'Fantasy'
+}
+
+const film: Film = {
+  title: 'Herring Potter and the Philosopher\'s Stone',
+  director: 'Chris Columbus',
+  genre: 'Fantasy',
+  rating: 'PG'
+}
+
+// ------------------------------------------------------------------------- //
+// Uncomment and complete the code below...                                  //
+// ------------------------------------------------------------------------- //
+
+// const bookReview: Book & Review = {}
+
+// const filmReview: Film & Review = {}
+
+// const adaptation: Book & Film = {}
+
+// const bookAndFilmSeries: BookSeries & FilmSeries = {}
