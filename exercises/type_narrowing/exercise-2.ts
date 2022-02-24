@@ -1,4 +1,8 @@
 // @ts-nocheck - delete this comment at the start of the exercise!
+import { users } from './users'
+
+type User = Admin | Subscriber | TrialUser
+
 class Admin {
   name: string = ''
   superAdmin: boolean = false
@@ -14,8 +18,6 @@ class TrialUser {
   trialEnds: Date = new Date()
 }
 
-type User = Admin | Subscriber | TrialUser
-
 export function displayAdmin (admin: Admin): string {
   return admin.superAdmin ? 'super admin' : 'admin user'
 }
@@ -27,8 +29,8 @@ export function displaySubscriber (subscriber: Subscriber): string {
 export function displayTrialUser (trialUser: TrialUser): string {
   return `trial user (until ${trialUser.trialEnds.toLocaleDateString()})`
 }
-    
-function displayUsers (value?: User | User[]): string {
+
+export function displayUsers (value?: User | User[]): string {
   const isArray = false
   const isAdmin = false
   const isSubscriber = false
@@ -52,3 +54,5 @@ function displayUsers (value?: User | User[]): string {
 
   return 'no users'
 }
+
+console.log(displayUsers(users))

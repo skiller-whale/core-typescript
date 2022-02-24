@@ -1,4 +1,4 @@
-// @ts-nocheck - delete this comment at the start of the exercise!
+import { taggedUsers as users } from './users'
 import { displayAdmin, displaySubscriber, displayTrialUser } from './exercise-2'
 
 type User =
@@ -31,7 +31,7 @@ function displayUser (user: User): string {
 }
 
 function homePageRedirect (user: User, response: Response): void {
-  switch(user.tag) {
+  switch (user.tag) {
     case 'Subscriber':
       response.redirect(`/subscriber/${user.value.subscriptionType}`)
       break
@@ -43,3 +43,5 @@ function homePageRedirect (user: User, response: Response): void {
       break
   }
 }
+
+users.forEach(user => console.log(displayUser(user)))

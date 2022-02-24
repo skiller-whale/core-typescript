@@ -1,18 +1,22 @@
-export default {} // empty export to ensure the compiler treats this file as a module
+import { users } from './users'
+import { displayUsers } from './exercise-2'
 
-type User = Subscriber | Admin
-
-type Subscriber = {
-  name: string,
-  subscriptionType: string
-}
+type User = Admin | Subscriber | TrialUser
 
 type Admin = {
   name: string,
   superAdmin: boolean
 }
 
-const users: User[] = []
+type Subscriber = {
+  name: string,
+  subscriptionType: string
+}
+
+type TrialUser = {
+  name: string,
+  trialEnds: Date
+}
 
 const admins: Admin[] = []
 
@@ -21,3 +25,5 @@ for (const user of users) {
     admins.push(user)
   }
 }
+
+console.log(displayUsers(users))
