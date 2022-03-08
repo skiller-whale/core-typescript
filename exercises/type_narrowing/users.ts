@@ -36,3 +36,40 @@ export const taggedUsers: TaggedUser[] = users.map(user => {
   if ('subscriptionType' in user) return { tag: 'Subscriber', value: user }
   return { tag: 'TrialUser', value: user }
 })
+
+export function displayAdmin (admin: Admin): string {
+  return admin.superAdmin ? 'super admin' : 'admin user'
+}
+
+export function displaySubscriber (subscriber: Subscriber): string {
+  return `${subscriber.subscriptionType} user`
+}
+
+export function displayTrialUser (trialUser: TrialUser): string {
+  return `trial user (until ${trialUser.trialEnds.toLocaleDateString()})`
+}
+
+export function displayUsers (value?: User | User[]): string {
+  const isArray = Array.isArray(value)
+  const isAdmin = value && 'superAdmin' in value
+  const isSubscriber = value && 'subscriptionType' in value
+  const isTrialUser = value && 'trialEnds' in value
+
+  if (isArray) {
+    return value.map(displayUsers).join('\n')
+  }
+
+  if (isAdmin) {
+    return displayAdmin(value)
+  }
+
+  if (isSubscriber) {
+    return displaySubscriber(value)
+  }
+
+  if (isTrialUser) {
+    return displayTrialUser(value)
+  }
+
+  return 'no users'
+}

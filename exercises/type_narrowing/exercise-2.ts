@@ -3,34 +3,34 @@ import { users } from './users'
 
 type User = Admin | Subscriber | TrialUser
 
-class Admin {
-  name: string = ''
-  superAdmin: boolean = false
+type Admin = {
+  name: string
+  superAdmin: boolean
 }
 
-class Subscriber {
-  name: string = ''
-  subscriptionType: string = ''
+type Subscriber = {
+  name: string
+  subscriptionType: string
 }
 
-class TrialUser {
-  name: string = ''
-  trialEnds: Date = new Date()
+type TrialUser = {
+  name: string
+  trialEnds: Date
 }
 
-export function displayAdmin (admin: Admin): string {
+function displayAdmin (admin: Admin): string {
   return admin.superAdmin ? 'super admin' : 'admin user'
 }
 
-export function displaySubscriber (subscriber: Subscriber): string {
+function displaySubscriber (subscriber: Subscriber): string {
   return `${subscriber.subscriptionType} user`
 }
 
-export function displayTrialUser (trialUser: TrialUser): string {
+function displayTrialUser (trialUser: TrialUser): string {
   return `trial user (until ${trialUser.trialEnds.toLocaleDateString()})`
 }
 
-export function displayUsers (value?: User | User[]): string {
+function displayUsers (value?: User | User[]): string {
   const isArray = false
   const isAdmin = false
   const isSubscriber = false

@@ -1,5 +1,4 @@
-import { users } from './users'
-import { displayUsers } from './exercise-2'
+import { displayUsers, users } from './users'
 
 type User = Admin | Subscriber | TrialUser
 
@@ -26,4 +25,4 @@ for (const user of users) {
   }
 }
 
-console.log(displayUsers(users))
+console.log(displayUsers(admins))

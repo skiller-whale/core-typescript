@@ -1,5 +1,4 @@
-import { taggedUsers as users } from './users'
-import { displayAdmin, displaySubscriber, displayTrialUser } from './exercise-2'
+import { displayAdmin, displaySubscriber, displayTrialUser, taggedUsers as users } from './users'
 
 type User =
   | { tag: 'Admin', value: Admin }
