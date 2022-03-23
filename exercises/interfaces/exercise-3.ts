@@ -15,7 +15,7 @@ class ChatMessage {
   }
 
   preview () {
-    return `Username: ${this.username}, Message text: ${this.text}`
+    return `Username: ${this.username}, Message text: ${this.body}`
   }
 }
 

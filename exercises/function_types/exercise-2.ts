@@ -1,24 +1,20 @@
-import { Invoice, invoices } from "./invoices"
+export default {} // empty export to ensure the compiler treats this file as a module
 
-function getLateFee (invoice: Invoice): number | undefined {
-  return invoice.late ? 50 : undefined
+type Film = {
+  title: string
+  director: string
+  rating: 'U' | 'PG' | 12 | 15 | 18
 }
 
-function makePayment (recipient: string, cost: number): void {
-  console.log(`£${cost} paid to ${recipient}`)
+const films: Film[] = [
+  { title: 'Finding Nemo', director: 'Andrew Sturgeon', rating: 'U' },
+  { title: 'Barracuda', director: 'Harry Kerwin', rating: 15 },
+  { title: 'Big Fish', director: 'Tim Burton', rating: 'PG' },
+  { title: 'A Fish Called Wanda', director: 'Charles Crichton', rating: 18 }
+]
+
+function formatFilm (film: Film): string {
+  return `${film.title} (${film.rating}), directed by ${film.director}`
 }
 
-function markAsProcessed (invoice: Invoice): void {
-  invoice.processed = true
-}
-
-function processInvoices (invoices: Invoice[]): void {
-  for (const invoice of invoices) {
-    if (!invoice.processed) {
-      makePayment(invoice.recipient, invoice.cost)
-      markAsProcessed(invoice)
-    }
-  }
-}
-
-processInvoices(invoices)
+// logFilms(true, films[0], films[2], films[3])

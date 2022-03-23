@@ -1,33 +1,39 @@
-import { Invoice, invoices } from "./invoices"
+export default {} // empty export to ensure the compiler treats this file as a module
 
-function getTax (invoice: Invoice): number | undefined {
-  return invoice.tax ? invoice.cost * 0.2 : undefined
+type Film = {
+  title: string
+  director: string
+  rating: 'U' | 'PG' | 12 | 15 | 18
 }
 
-function getLateFee (invoice: Invoice): number | undefined {
-  return invoice.late ? 50 : undefined
+const films: Film[] = [
+  { title: 'Finding Nemo', director: 'Andrew Sturgeon', rating: 'U' },
+  { title: 'Barracuda', director: 'Harry Kerwin', rating: 15 },
+  { title: 'Big Fish', director: 'Tim Burton', rating: 'PG' },
+  { title: 'A Fish Called Wanda', director: 'Charles Crichton', rating: 18 }
+]
+
+function formatFilm1 (film: Film, index?: number) {
+  const text = `${film.title} (${film.rating}), directed by ${film.director}`
+  return index !== undefined
+    ? `${index}. ${text}`
+    : text
 }
 
-function makePayment (recipient: string, cost: number): void {
-  console.log(`£${cost} paid to ${recipient}`)
+function formatFilm2 (film: Film, index?: number): string {
+  const text = `${film.title} (${film.director}), rated ${film.rating}`
+  return index !== undefined
+    ? `${index}. ${text}`
+    : text
 }
 
-function markAsProcessed (invoice: Invoice): void {
-  invoice.processed = true
-}
-
-function processInvoices (): void {
-  for (const invoice of invoices) {
-    if (!invoice.processed) {
-      const tax = getTax(invoice)
-      const lateFee = getLateFee(invoice)
-      if (tax) invoice.cost += tax
-      if (lateFee) invoice.cost += lateFee
-
-      makePayment(invoice.recipient, invoice.cost)
-      markAsProcessed(invoice)
-    }
+function logFilms (showIndex: boolean, ...films: Film[]): void {
+  for (let i = 0; i < films.length; i += 1) {
+    const log = showIndex
+      ? formatFilm1(films[i], i)
+      : formatFilm1(films[i])
+    console.log(log)
   }
 }
 
-processInvoices()
+// logFilms(formatFilm2, false, films[0], films[2], films[3])
