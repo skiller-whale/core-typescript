@@ -3,14 +3,14 @@ export {} // Treats this file as a module, isolating type names
 class Contact {
   email: string
   phone: string
-  sendEmail: boolean
-  sendSMS: boolean
+  isSubscribedToEmail: boolean
+  isSubscribedToSMS: boolean
 
-  constructor(email: string, phone: string, sendEmail: boolean, sendSMS: boolean) {
-      this.email = email
-      this.phone = phone
-      this.sendEmail = sendEmail
-      this.sendSMS = sendSMS
+  constructor (email: string, phone: string, isSubscribedToEmail: boolean, isSubscribedToSMS: boolean) {
+    this.email = email
+    this.phone = phone
+    this.isSubscribedToEmail = isSubscribedToEmail
+    this.isSubscribedToSMS = isSubscribedToSMS
   }
 }
 
@@ -20,27 +20,27 @@ class Message {
   sender: Contact
   recipients: Contact[]
 
-  constructor(sender: Contact, recipients: Contact[]) {
+  constructor (sender: Contact, recipients: Contact[]) {
     this.sender = sender
     this.recipients = recipients
   }
 }
 
 class Email extends Message {
-    preview() {
-        const recipients = this.recipients.map(r => r.email).join(',')
-        console.log(`Email from ${this.sender.email} to ${recipients}`)
-    }
+  preview() {
+    const recipients = this.recipients.map(r => r.email).join(',')
+    console.log(`Email from ${this.sender.email} to ${recipients}`)
+  }
 }
 
 class SMS extends Message {
-    preview() {
-        const recipients = this.recipients.map(r => r.phone).join(', ')
-        console.log(`SMS from ${this.sender.phone} to ${recipients}`)
-    }
+  preview() {
+    const recipients = this.recipients.map(r => r.phone).join(', ')
+    console.log(`SMS from ${this.sender.phone} to ${recipients}`)
+  }
 }
 
-const defaultContact = new Contact('orcaniser@skillerwhale.test', '+123 456 78 90')
+const defaultContact = new Contact('orcaniser@skillerwhale.test', '+123 456 78 90', false, false)
 
 const contacts1 = [
   new Contact('ada@plaicebook.test', '+1234560001', true, true),
@@ -55,13 +55,13 @@ const contacts2 = [
 ]
 
 const messages1 = [
-  new SMS(defaultContact, contacts1.filter(r => r.sendSMS)),
-  new Email(defaultContact, contacts1.filter(r => r.sendEmail))
+  new SMS(defaultContact, contacts1.filter(r => r.isSubscribedToSMS)),
+  new Email(defaultContact, contacts1.filter(r => r.isSubscribedToEmail))
 ]
 
 const messages2 = [
-  new SMS(defaultContact, contacts2.filter(r => r.sendSMS)),
-  new Email(defaultContact, contacts2.filter(r => r.sendEmail))
+  new SMS(defaultContact, contacts2.filter(r => r.isSubscribedToSMS)),
+  new Email(defaultContact, contacts2.filter(r => r.isSubscribedToEmail))
 ]
 
 messages1[0]?.preview()
