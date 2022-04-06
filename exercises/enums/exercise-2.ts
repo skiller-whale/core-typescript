@@ -65,14 +65,5 @@ function describePlanet (planet: Planet): string {
   return `${planetToString(planet)} is a ${planetTypeToString(getPlanetType(planet))}`
 }
 
-function isPlanetName (name: string): boolean {
-  return Planet[name] !== undefined
-}
-
-for (const possiblePlanet of ['Mars', 'Saturn', 'Pluto']) {
-  if (isPlanetName(possiblePlanet)) {
-    console.log(describePlanet(Planet[possiblePlanet]))
-  } else {
-    console.log(`${possiblePlanet} is not a planet`)
-  }
-}
+console.log(describePlanet(Planet.Mars))
+console.log(describePlanet(Planet.Saturn))
