@@ -1,5 +1,4 @@
-// empty export to ensure the compiler treats this file as a module
-export {}
+export {} // empty export to ensure the compiler treats this file as a module
 
 type SubscriptionDetails = { name: string, subscriptionType: string, access: string }
 

@@ -1,14 +1,30 @@
-// empty export to ensure the compiler treats this file as a module
-export {}
+export {} // empty export to ensure the compiler treats this file as a module
 
-type Subscriber = { name: string, subscriptionType: string }
+type Subscriber = {
+  name: string,
+  subscriptionType: string
+}
 
-type Admin = { name: string, superAdmin: boolean }
+type TrialUser = {
+  name: string,
+  trialEnds: Date
+}
 
-type User = Subscriber | Admin
+type Admin = {
+  name: string,
+  superAdmin: boolean
+}
 
-const hybrid = {}
+type User = Subscriber | TrialUser | Admin
 
-const subscriber = hybrid
-const admin = hybrid
-const user = hybrid
+function getDescription (user: User): string {
+  if ('subscriptionType' in user) {
+    return `${user.name} is a subscriber with a ${user.subscriptionType} subscription`
+  } else if ('trialEnds' in user) {
+    return `${user.name} is on a trial subscription which ends on ${user.trialEnds}`
+  } else if ('superAdmin' in user) {
+    return `${user.name} is an admin with ${user.superAdmin ? 'full' : 'partial'} admin rights`
+  } else {
+    return 'this should be impossible'
+  }
+}
