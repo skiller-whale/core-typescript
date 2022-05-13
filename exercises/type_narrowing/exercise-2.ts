@@ -1,5 +1,5 @@
 // @ts-nocheck - delete this comment at the start of the exercise!
-import { users } from './users'
+import { users } from "./users"
 
 type User = Admin | Subscriber | TrialUser
 
@@ -18,26 +18,26 @@ type TrialUser = {
   trialEnds: Date
 }
 
-function displayAdmin (admin: Admin): string {
-  return admin.superAdmin ? 'super admin' : 'admin user'
+function displayAdmin(admin: Admin): string {
+  return admin.superAdmin ? "super admin" : "admin user"
 }
 
-function displaySubscriber (subscriber: Subscriber): string {
+function displaySubscriber(subscriber: Subscriber): string {
   return `${subscriber.subscriptionType} user`
 }
 
-function displayTrialUser (trialUser: TrialUser): string {
+function displayTrialUser(trialUser: TrialUser): string {
   return `trial user (until ${trialUser.trialEnds.toLocaleDateString()})`
 }
 
-function displayUsers (value?: User | User[]): string {
+function displayUsers(value?: User | User[]): string {
   const isArray = false
   const isAdmin = false
   const isSubscriber = false
   const isTrialUser = false
 
   if (isArray) {
-    return value.map(displayUsers).join('\n')
+    return value.map(displayUsers).join("\n")
   }
 
   if (isAdmin) {
@@ -52,7 +52,7 @@ function displayUsers (value?: User | User[]): string {
     return displayTrialUser(value)
   }
 
-  return 'no users'
+  return "no users"
 }
 
 console.log(displayUsers(users))

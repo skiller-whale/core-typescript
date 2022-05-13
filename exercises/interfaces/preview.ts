@@ -6,7 +6,7 @@ export interface Previewable {
   preview: Preview
 }
 
-export function printPreview (message: Previewable) {
+export function printPreview(message: Previewable) {
   console.log(`Preview for ${message.label}:`)
   console.log(message.preview())
 }

@@ -1,4 +1,4 @@
-export default {}
+export {} // empty export to ensure the compiler treats this file as a module
 
 enum Planet {
   Mercury,
@@ -8,15 +8,15 @@ enum Planet {
   Jupiter,
   Saturn,
   Uranus,
-  Neptune
+  Neptune,
 }
 
 enum PlanetType {
   SmallRockPlanet,
-  GasGiant
+  GasGiant,
 }
 
-function getPlanetType (planet: Planet): PlanetType {
+function getPlanetType(planet: Planet): PlanetType {
   switch (planet) {
     case Planet.Mercury:
     case Planet.Venus:
@@ -31,38 +31,40 @@ function getPlanetType (planet: Planet): PlanetType {
   }
 }
 
-function planetToString (planet: Planet): string {
+function planetToString(planet: Planet): string {
   switch (planet) {
     case Planet.Mercury:
-      return 'Mercury'
+      return "Mercury"
     case Planet.Venus:
-      return 'Venus'
+      return "Venus"
     case Planet.Earth:
-      return 'Earth'
+      return "Earth"
     case Planet.Mars:
-      return 'Mars'
+      return "Mars"
     case Planet.Jupiter:
-      return 'Jupiter'
+      return "Jupiter"
     case Planet.Saturn:
-      return 'Saturn'
+      return "Saturn"
     case Planet.Uranus:
-      return 'Uranus'
+      return "Uranus"
     case Planet.Neptune:
-      return 'Neptune'
+      return "Neptune"
   }
 }
 
-function planetTypeToString (planetType: PlanetType): string {
+function planetTypeToString(planetType: PlanetType): string {
   switch (planetType) {
     case PlanetType.SmallRockPlanet:
-      return 'small rock planet'
+      return "small rock planet"
     case PlanetType.GasGiant:
-      return 'gas giant'
+      return "gas giant"
   }
 }
 
-function describePlanet (planet: Planet): string {
-  return `${planetToString(planet)} is a ${planetTypeToString(getPlanetType(planet))}`
+function describePlanet(planet: Planet): string {
+  return `${planetToString(planet)} is a ${planetTypeToString(
+    getPlanetType(planet)
+  )}`
 }
 
 console.log(describePlanet(Planet.Mars))

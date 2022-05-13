@@ -1,26 +1,26 @@
-import { displayUsers, users } from './users'
+import { displayUsers, users } from "./users"
 
 type User = Admin | Subscriber | TrialUser
 
 type Admin = {
-  name: string,
+  name: string
   superAdmin: boolean
 }
 
 type Subscriber = {
-  name: string,
+  name: string
   subscriptionType: string
 }
 
 type TrialUser = {
-  name: string,
+  name: string
   trialEnds: Date
 }
 
 const admins: Admin[] = []
 
 for (const user of users) {
-  if ('superAdmin' in user) {
+  if ("superAdmin" in user) {
     admins.push(user)
   }
 }

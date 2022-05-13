@@ -1,4 +1,4 @@
-export {} // Treats this file as a module, isolating type names
+export {} // empty export to ensure the compiler treats this file as a module
 
 class Contact {
   private _email: string
@@ -6,73 +6,89 @@ class Contact {
   isSubscribedToEmail: boolean
   isSubscribedToSMS: boolean
 
-  constructor (email: string, phone: string, isSubscribedToEmail: boolean, isSubscribedToSMS: boolean) {
+  constructor(
+    email: string,
+    phone: string,
+    isSubscribedToEmail: boolean,
+    isSubscribedToSMS: boolean
+  ) {
     this._email = email
     this._phone = phone
     this.isSubscribedToEmail = isSubscribedToEmail
     this.isSubscribedToSMS = isSubscribedToSMS
   }
 
-  equalTo (recipient: Contact): boolean {
+  equalTo(recipient: Contact): boolean {
     return this._email === recipient.email && this._phone === recipient.phone
   }
 
-  get email (): string {
+  get email(): string {
     return this._email
   }
 
-  get phone (): string {
+  get phone(): string {
     return this._phone
   }
 }
 
 class Message {
-  static DEFAULT_FROM = new Contact('orcaniser@skillerwhale.test', '+123 456 78 90', false, false)
+  static DEFAULT_FROM = new Contact(
+    "orcaniser@skillerwhale.test",
+    "+123 456 78 90",
+    false,
+    false
+  )
 
-  static buildMessages (recipients: Contact[]): [SMS, Email] {
+  static buildMessages(recipients: Contact[]): [SMS, Email] {
     return [
-      new SMS(Message.DEFAULT_FROM, recipients.filter(r => r.isSubscribedToSMS)),
-      new Email(Message.DEFAULT_FROM, recipients.filter(r => r.isSubscribedToEmail))
+      new SMS(
+        Message.DEFAULT_FROM,
+        recipients.filter((r) => r.isSubscribedToSMS)
+      ),
+      new Email(
+        Message.DEFAULT_FROM,
+        recipients.filter((r) => r.isSubscribedToEmail)
+      ),
     ]
   }
 
   sender: Contact
   recipients: Contact[]
 
-  constructor (sender: Contact, recipients: Contact[]) {
+  constructor(sender: Contact, recipients: Contact[]) {
     this.sender = sender
     this.recipients = recipients
   }
 
-  preview () {
+  preview() {
     console.log(`Message from ${this.sender}`)
   }
 }
 
 class Email extends Message {
-  preview () {
-    const emails = this.recipients.map(r => r.email).join(',')
+  preview() {
+    const emails = this.recipients.map((r) => r.email).join(",")
     console.log(`Email from ${this.sender.email} to ${emails}`)
   }
 }
 
 class SMS extends Message {
-  preview () {
-    const phoneNumbers = this.recipients.map(r => r.phone).join(',')
+  preview() {
+    const phoneNumbers = this.recipients.map((r) => r.phone).join(",")
     console.log(`SMS from ${this.sender.phone} to ${phoneNumbers}`)
   }
 }
 
 const contacts1 = [
-  new Contact('ada@plaicebook.test', '+1234560001', true, true),
-  new Contact('betty@plaicebook.test', '+1234560002', true, true),
-  new Contact('celine@plaicebook.test', '+1234560003', true, true),
+  new Contact("ada@plaicebook.test", "+1234560001", true, true),
+  new Contact("betty@plaicebook.test", "+1234560002", true, true),
+  new Contact("celine@plaicebook.test", "+1234560003", true, true),
 ]
 
 const contacts2 = [
-  new Contact('alex@plaicebook.test', '', true, false),
-  new Contact('bob@plaicebook.test', '', true, false),
-  new Contact('', '+1234560006', false, true),
+  new Contact("alex@plaicebook.test", "", true, false),
+  new Contact("bob@plaicebook.test", "", true, false),
+  new Contact("", "+1234560006", false, true),
 ]
 
 const messages1 = Message.buildMessages(contacts1)
