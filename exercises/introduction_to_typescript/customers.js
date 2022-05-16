@@ -69,8 +69,8 @@ export function findUnhappyCustomers(purchasesCutOff, complaintsThreshold) {
 
 export function logCustomer({ name, email }, includeEmail) {
   if (includeEmail) {
-    console.log(` - ${name} (${email})`)
+    console.log(`${name} (${email})`)
   } else {
-    console.log(customer.name)
+    console.log(name)
   }
 }
