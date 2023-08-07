@@ -1,75 +1,31 @@
-export {} // empty export to ensure the compiler treats this file as a module
+export default {} // empty export to ensure the compiler treats this file as a module
 
-type Origin =
-  | "Africa"
-  | "Asia"
-  | "Australia"
-  | "Europe"
-  | "North America"
-  | "South America"
-  | "unknown origin"
+// types
+type Coordinates = readonly [number, number]
 
-type Fruit =
-  | "Apple"
-  | "Banana"
-  | "Blueberry"
-  | "Cranberry"
-  | "Guava"
-  | "Mangosteen"
-  | "Orange"
-  | "Peach"
-  | "Pear"
-  | "Pineapple"
-  | "Quandong"
-  | "Riberry"
-  | "Tamarillo"
-  | "Watermelon"
+type Line = Readonly<{
+  thickness: number
+  points: readonly Coordinates[]
+}>
 
-type OriginList = {
-  Africa: Fruit[]
-  Asia: Fruit[]
-  Australia: Fruit[]
-  Europe: Fruit[]
-  "North America": Fruit[]
-  "South America": Fruit[]
+// functions
+function generateRandomLine(): Line {
+  const thickness = Math.floor(Math.random() * 10) + 1
+  const length = Math.floor(Math.random() * 10)
+  const points = new Array(length).map(generateRandomCoordinates)
+  return { thickness, points }
 }
 
-const origins: OriginList = {
-  Africa: ["Pineapple", "Watermelon"],
-  Asia: ["Apple", "Banana", "Orange"],
-  Australia: ["Quandong", "Riberry"],
-  Europe: ["Peach", "Pear"],
-  "North America": ["Blueberry", "Cranberry"],
-  "South America": ["Guava", "Tamarillo"],
+function generateRandomLine2(): Line {
+  const thickness = Math.floor(Math.random() * 10) + 1
+  const additionalLength = Math.floor(Math.random() * 10)
+  const additionalPoints = new Array(additionalLength).map(generateRandomCoordinates)
+  const points = [generateRandomCoordinates(), generateRandomCoordinates(), ...additionalPoints]
+  return { thickness, points }
 }
 
-type ItemRecord = { fruit: Fruit; shelves: number[]; total: number }
-
-const itemRecords: ItemRecord[] = [
-  { fruit: "Apple", total: 16, shelves: [4, 6] },
-  { fruit: "Mangosteen", total: 14, shelves: [2, 4] },
-  { fruit: "Guava", total: 5, shelves: [3, 4] },
-  { fruit: "Tamarillo", total: 7, shelves: [5, 6] },
-  { fruit: "Orange", total: 22, shelves: [1, 3, 6] },
-  { fruit: "Pear", total: 15, shelves: [3, 6] },
-  { fruit: "Watermelon", total: 2, shelves: [2] },
-]
-
-function getDescription(itemRecord: ItemRecord): string {
-  return `We have ${itemRecord.total} ${itemRecord.fruit}(s) from ${getOrigin(
-    itemRecord.fruit
-  )}`
-}
-
-function getOrigin(fruit: Fruit): string {
-  for (const origin in origins) {
-    if (origin.includes(fruit)) {
-      return origin
-    }
-  }
-  return "unknown origin"
-}
-
-for (const itemRecord of itemRecords) {
-  console.log(getDescription(itemRecord))
+function generateRandomCoordinates(): Coordinates {
+  const x = Math.floor(Math.random() * 100)
+  const y = Math.floor(Math.random() * 100)
+  return [x, y]
 }
