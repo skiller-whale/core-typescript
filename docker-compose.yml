@@ -1,11 +1,25 @@
-version: '3.7'
+version: "3.7"
 services:
+  sync:
+    image: "ghcr.io/skiller-whale/learnersync"
+    network_mode: "host"
+    environment:
+      SERVER_URL: "https://train.skillerwhale.com/"
+      WATCHER_BASE_PATH: "/app/exercises"
+      ATTENDANCE_ID_FILE: "/app/sync/attendance_id"
+      WATCHED_EXTS: "ts js json"
+      IGNORE_DIRS: ".git"
+    volumes:
+      - "./exercises:/app/exercises:ro"
+      - "./attendance_id:/app/sync/attendance_id:ro"
+    tty: true
+    stdin_open: true
   typescript:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: "Dockerfile"
+    working_dir: "/exercises"
     volumes:
-      - ./attendance_id:/session/attendance_id
-      - ./exercises:/session/exercises
+      - "./exercises:/exercises"
     stdin_open: true
     tty: true
