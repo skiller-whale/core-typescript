@@ -1,25 +1,53 @@
-export {} // empty export to ensure the compiler treats this file as a module
+// @ts-nocheck
+export default {} // empty export to ensure the compiler treats this file as a module
 
-type ItemRecord = { item: string; shelves: number[]; total: number }
+// types
+type Coordinates = [number, number]
 
-const itemRecords: ItemRecord[] = [
-  { item: "Apple", total: 16, shelves: [4, 6] },
-  { item: "Banana", total: 14, shelves: [2, 4] },
-  { item: "Orange", total: 22, shelves: [1, 3, 6] },
-  { item: "Guava", total: 7, shelves: [5, 6] },
-  { item: "Pear", total: 15, shelves: [3, 6] },
-  { item: "Mangosteen", total: 4, shelves: [3, 4] },
-  { item: "Watermelon", total: 2, shelves: [2] },
-]
-
-function getDescription(itemRecord: ItemRecord): string {
-  const description = `We have ${itemRecord.total} ${
-    itemRecord.item
-  }(s) on shelves ${itemRecord.shelves.join(", ")}`
-  return description
+// functions
+function scaleCoordinates(coordinates: Coordinates[], factor: number): Coordinates[] {
+  return coordinates.map(([x, y]) => [x * factor, y * factor])
 }
 
-for (const itemRecord of itemRecords) {
-  const description = getDescription(itemRecord)
-  console.log(description)
+function assertEqual(actual: Coordinates[], expected: Coordinates[]) {
+  for (let i = 0; i < expected.length; i++) {
+    const [x1, y1] = expected[i]
+    const [x2, y2] = actual[i]
+    if (x1 !== x2) {
+      return [false, `x value incorrect at index ${i}: expected ${x1}, saw ${x2}`]
+    }
+    if (y1 !== y2) {
+      return [false, `y value incorrect at index ${i}: expected ${y1}, saw ${y2}`]
+    }
+  }
+  return [true]
+}
+
+function logError(index: number, error: string) {
+  console.log(`Test ${index + 1} failed:`)
+  console.log(error)
+}
+
+// test data
+const testValues = [
+  [[], 2, []],
+  [[[1, 2]], 2, [[2, 4]]],
+  [[[1, 2], 3, 4], 3, [[3, 6], [9, 12]]],
+  [[[1, 2], [1, 2]], 4, [4, 8], [4, 8]],
+]
+
+// test the scaleCoordinates function
+let allOk = true
+
+testValues.forEach(([input, factor, expectedOutput], index) => {
+  const actualOutput = scaleCoordinates(input, factor)
+  const [areEqual, error] = assertEqual(actualOutput, expectedOutput)
+  if (!areEqual) {
+    allOk = false
+    logError(index, error)
+  }
+})
+
+if (allOk) {
+  console.log("All tests passed!")
 }
