@@ -38,6 +38,6 @@ type ObjectPropertyIntersection<T extends object, U extends object> = {
 }
 
 const test2: ObjectPropertyIntersection<Skiller, Whale> = {
-  id: 1,
+  id: "ada",
   name: "Ada",
 }

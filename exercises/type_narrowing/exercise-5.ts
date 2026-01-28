@@ -4,6 +4,7 @@ import type {
   Event,
   PageViewEvent,
   UserLoginEvent,
+  UserLogoutEvent,
 } from "./_types.ts";
 
 // ----------------------------------------------------------------------
@@ -31,13 +32,18 @@ function userLoginEventToString(event: UserLoginEvent): string {
   } (at ${timestampToISO(event.timestamp)})`;
 }
 
+function userLogoutEventToString(event: UserLogoutEvent): string {
+  return `User ${event.userId} logged out (at ${timestampToISO(event.timestamp)})`;
+}
+
 function eventToString(event: Event) {
-  if ("ipAddress" in event) {
-    return userLoginEventToString(event);
-  } else if ("url" in event) {
-    return pageViewEventToString(event);
-  } else if ("message" in event) {
-    return errorEventToString(event);
+  switch (event.type) {
+    case "user_login":
+      return userLoginEventToString(event);
+    case "page_view":
+      return pageViewEventToString(event);
+    case "error":
+      return errorEventToString(event);
   }
 }
 
@@ -50,6 +56,6 @@ function logEvents(events: Event[]) {
 // ----------------------------------------------------------------------
 // execution
 // ----------------------------------------------------------------------
-console.log("Logging event strings...");
+console.log("Logging event descriptions...");
 logEvents(events);
 console.log("Logging complete.");
