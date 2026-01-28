@@ -22,10 +22,10 @@ const calculateTotal = (values: unknown[], value: unknown): number =>
   values.reduce((acc, current) => (current === value ? acc + 1 : acc), 0)
 
 // get the first element from a tuple
-const first = ([t]: [unknown, unknown]): unknown => t
+const first = ([firstElement]: [unknown, unknown]): unknown => firstElement
 
 // get the second element from a tuple
-const second = ([, u]: [unknown, unknown]): unknown => u
+const second = ([, secondElement]: [unknown, unknown]): unknown => secondElement
 
 const test1 = mode([1, 1, 2, 2, 2, 2, 3, 3, 4, 4, 4, 4, 5, 6, 6])
 const test2 = mode(["a", "a", "b", "b", "b", "c", "d", "d", "d"])

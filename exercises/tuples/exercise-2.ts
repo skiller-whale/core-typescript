@@ -39,8 +39,8 @@ const testValues = [
 // test the scaleCoordinates function
 let allOk = true
 
-testValues.forEach(([input, factor, expectedOutput], index) => {
-  const actualOutput = scaleCoordinates(input, factor)
+testValues.forEach(([coordinates, factor, expectedOutput], index) => {
+  const actualOutput = scaleCoordinates(coordinates, factor)
   const [areEqual, error] = assertEqual(actualOutput, expectedOutput)
   if (!areEqual) {
     allOk = false

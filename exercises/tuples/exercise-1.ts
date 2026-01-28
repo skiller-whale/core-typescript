@@ -1,8 +1,10 @@
 // types
 type Line = {
-  thickness: number;
-  coordinates: number[][];
-};
+  thickness: number
+  coordinates: Coordinates[]
+}
+
+type Coordinates = number[]
 
 // functions
 function scaleLine(line: Line, factor: number): Line {
@@ -12,11 +14,11 @@ function scaleLine(line: Line, factor: number): Line {
       coordinates[1] * factor,
       coordinates[2] * factor,
     ]),
-  };
+  }
 }
 
 function showLine(name: string, line: Line): void {
-  console.log(`${name}: (${line.coordinates.join("), (")})`);
+  console.log(`${name}: (${line.coordinates.join("), (")})`)
 }
 
 // data
@@ -37,11 +39,11 @@ const lines: Record<string, Line> = {
       [2, 2],
     ],
   },
-};
+}
 
 // execution
-const bigStraightLine = scaleLine(lines["Straight line"], 2);
-showLine("Big straight line", bigStraightLine);
+const bigStraightLine = scaleLine(lines["Straight line"], 2)
+showLine("Big straight line", bigStraightLine)
 
 // uncomment this line when instructed
-// Object.entries(lines).forEach(showLine);
+// Object.entries(lines).forEach(showLine)

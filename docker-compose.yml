@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   sync:
     image: "ghcr.io/skiller-whale/learnersync:0.2.1"
@@ -9,7 +8,7 @@ services:
       WATCHER_BASE_PATH: "/app/exercises"
       ATTENDANCE_ID_FILE: "/app/sync/attendance_id"
       WATCHED_EXTS: ".ts .js .json"
-      IGNORE_DIRS: ".git"
+      IGNORE_MATCH: ".git"
     volumes:
       - "./exercises:/app/exercises:ro"
       - "./attendance_id:/app/sync/attendance_id:ro"

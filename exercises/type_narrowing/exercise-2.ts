@@ -1,58 +1,57 @@
-// @ts-nocheck - delete this comment at the start of the exercise!
-import { users } from "./users"
+import { data } from "./_data.ts";
+import type { Event, UserLoginEvent } from "./_types.ts";
 
-type User = Admin | Subscriber | TrialUser
+// ----------------------------------------------------------------------
+// business logic
+// ----------------------------------------------------------------------
+function isValidEvent(event: any) {
+  if (typeof event !== "object" || event === null) return false;
+  if (typeof event.type !== "string") return false;
+  if (typeof event.timestamp !== "number") return false;
 
-type Admin = {
-  name: string
-  superAdmin: boolean
-}
-
-type Subscriber = {
-  name: string
-  subscriptionType: string
-}
-
-type TrialUser = {
-  name: string
-  trialEnds: Date
-}
-
-function displayAdmin(admin: Admin): string {
-  return admin.superAdmin ? "super admin" : "admin user"
-}
-
-function displaySubscriber(subscriber: Subscriber): string {
-  return `${subscriber.subscriptionType} user`
-}
-
-function displayTrialUser(trialUser: TrialUser): string {
-  return `trial user (until ${trialUser.trialEnds.toLocaleDateString()})`
-}
-
-function displayUsers(value?: User | User[]): string {
-  const isArray = false
-  const isAdmin = false
-  const isSubscriber = false
-  const isTrialUser = false
-
-  if (isArray) {
-    return value.map(displayUsers).join("\n")
+  switch (event.type) {
+    case "user_login":
+      return (
+        typeof event.userId === "string" && typeof event.ipAddress === "string"
+      );
+    case "page_view":
+      return typeof event.userId === "string" && typeof event.url === "string";
+    case "error":
+      return (
+        typeof event.message === "string" && typeof event.severity === "string"
+      );
+    default:
+      return false;
   }
-
-  if (isAdmin) {
-    return displayAdmin(value)
-  }
-
-  if (isSubscriber) {
-    return displaySubscriber(value)
-  }
-
-  if (isTrialUser) {
-    return displayTrialUser(value)
-  }
-
-  return "no users"
 }
 
-console.log(displayUsers(users))
+function isUserLoginEvent(event: Event) {
+  return event.type === "user_login";
+}
+
+function isRecentUserLoginEvent(event: Event) {
+  return (
+    isUserLoginEvent(event) && event.timestamp > Date.now() - 1000 * 60 * 5
+  );
+}
+
+function processUserLoginEvent(event: UserLoginEvent) {
+  console.log(
+    `User ${event.userId} logged in from ${event.ipAddress} at ${event.timestamp}`
+  );
+}
+
+function filterAndProcessUserLoginEvents(data: unknown[]) {
+  data
+    .filter(isValidEvent)
+    .filter(isUserLoginEvent)
+    // .filter(isRecentUserLoginEvent)
+    .forEach(processUserLoginEvent);
+}
+
+// ----------------------------------------------------------------------
+// execution
+// ----------------------------------------------------------------------
+console.log("Processing user_login events...");
+filterAndProcessUserLoginEvents(data);
+console.log("Processing complete.");

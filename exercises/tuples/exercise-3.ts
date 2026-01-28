@@ -1,12 +1,12 @@
 export default {} // empty export to ensure the compiler treats this file as a module
 
 // types
-type Coordinates = readonly [number, number]
-
-type Line = Readonly<{
+type Line = {
   thickness: number
-  points: readonly Coordinates[]
-}>
+  points: Coordinates[]
+}
+
+type Coordinates = [number, number]
 
 // functions
 function generateRandomLine(): Line {

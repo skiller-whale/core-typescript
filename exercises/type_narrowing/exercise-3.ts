@@ -1,28 +1,40 @@
-import { displayUsers, users } from "./users"
+import type { ErrorEvent, PageViewEvent } from "./_types.ts";
 
-type User = Admin | Subscriber | TrialUser
-
-type Admin = {
-  name: string
-  superAdmin: boolean
+// ----------------------------------------------------------------------
+// third-party code (ASSUME YOU CANNOT MODIFY THIS)
+// ----------------------------------------------------------------------
+function logData(data: Record<string, unknown>) {
+  // imagine this sends your data to an external monitoring service
+  console.log("Sending data:", data);
 }
 
-type Subscriber = {
-  name: string
-  subscriptionType: string
+// ----------------------------------------------------------------------
+// business logic
+// ----------------------------------------------------------------------
+function getUserFromRequest(request: Request) {
+  // imagine this checks cookies or authentication headers and returns user info
+  return { id: "user123", name: "Ada" };
 }
 
-type TrialUser = {
-  name: string
-  trialEnds: Date
-}
-
-const admins: Admin[] = []
-
-for (const user of users) {
-  if ("superAdmin" in user) {
-    admins.push(user)
+function loggingMiddleware(
+  request: Request,
+  response: Response,
+  next: () => void
+) {
+  try {
+    next();
+    const user = getUserFromRequest(request);
+    logData({
+      type: "page_view",
+      timestamp: Date.now(),
+      userId: user.id,
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    logData({
+      type: "error",
+      timestamp: Date.now(),
+      message,
+    });
   }
 }
-
-console.log(displayUsers(admins))
