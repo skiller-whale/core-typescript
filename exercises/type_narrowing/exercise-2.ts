@@ -37,7 +37,7 @@ function isRecentUserLoginEvent(event: Event) {
 
 function processUserLoginEvent(event: UserLoginEvent) {
   console.log(
-    `User ${event.userId} logged in from ${event.ipAddress} at ${event.timestamp}`
+    `User ${event.userId} logged in from ${event.ipAddress} at ${event.timestamp}`,
   );
 }
 

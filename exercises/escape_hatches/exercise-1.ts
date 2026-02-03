@@ -50,7 +50,8 @@ const gameState: State = {
   score: 0,
   previousScores: [],
 };
-const history = "imagine user uploads JSON data here representing an array of actions";
+const history =
+  "imagine user uploads JSON data here representing an array of actions";
 
 try {
   const actions = JSON.parse(history);
