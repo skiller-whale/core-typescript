@@ -19,7 +19,7 @@ function getUserFromRequest(request: Request) {
 function loggingMiddleware(
   request: Request,
   response: Response,
-  next: () => void
+  next: () => void,
 ) {
   try {
     next();

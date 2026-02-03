@@ -15,25 +15,27 @@ function timestampToISO(timestamp: number): string {
 }
 
 function errorEventToString(event: ErrorEvent): string {
-  return `[${event.severity.toUpperCase()}] ${
-    event.message
-  } (at ${timestampToISO(event.timestamp)})`;
+  return `[${event.severity.toUpperCase()}] ${event.message} (at ${
+    timestampToISO(event.timestamp)
+  })`;
 }
 
 function pageViewEventToString(event: PageViewEvent): string {
-  return `User ${event.userId} viewed ${event.url} (at ${timestampToISO(
-    event.timestamp
-  )})`;
+  return `User ${event.userId} viewed ${event.url} (at ${
+    timestampToISO(event.timestamp)
+  })`;
 }
 
 function userLoginEventToString(event: UserLoginEvent): string {
-  return `User ${event.userId} logged in from ${
-    event.ipAddress
-  } (at ${timestampToISO(event.timestamp)})`;
+  return `User ${event.userId} logged in from ${event.ipAddress} (at ${
+    timestampToISO(event.timestamp)
+  })`;
 }
 
 function userLogoutEventToString(event: UserLogoutEvent): string {
-  return `User ${event.userId} logged out (at ${timestampToISO(event.timestamp)})`;
+  return `User ${event.userId} logged out (at ${
+    timestampToISO(event.timestamp)
+  })`;
 }
 
 function eventToString(event: Event) {
