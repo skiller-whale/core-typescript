@@ -25,7 +25,9 @@ function advanceGameState(action: Action) {
       break;
     case "reset-score":
       // look for the first score passed the checkpoint
-      const index = state.previousScores.findIndex((x) => x > action.checkpoint);
+      const index = state.previousScores.findIndex((x) =>
+        x > action.checkpoint
+      );
       if (index > -1) {
         // reset to that score if found
         state.score = state.previousScores[index];

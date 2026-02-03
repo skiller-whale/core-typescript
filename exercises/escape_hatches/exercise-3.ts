@@ -1,11 +1,11 @@
-import { describe, it, expect } from "./_pretend_test_framework.ts";
+import { describe, expect, it } from "./_pretend_test_framework.ts";
 import { advanceGameState } from "./_state.ts";
 import type { Action, State } from "./_types.ts";
 
 function createGameState(
   difficulty: string,
   score: number = 0,
-  previousScores: number[] = []
+  previousScores: number[] = [],
 ): State {
   return {
     difficulty,
@@ -13,7 +13,7 @@ function createGameState(
     previousScores,
   };
 }
-advanceGameState
+
 describe("updateState", () => {
   it("updates difficulty", () => {
     const gameState = createGameState("easy");
@@ -40,7 +40,7 @@ describe("updateState", () => {
     const gameState = createGameState("easy");
     const invalidAction = { message: "invalid-action" };
     expect(() => advanceGameState(gameState, invalidAction)).toThrow(
-      "Invalid action"
+      "Invalid action",
     );
   });
 });

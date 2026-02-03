@@ -6,8 +6,9 @@ function isValidDifficulty(value: unknown) {
 
 function isValidAction(action: unknown) {
   if (typeof action !== "object" || action === null) return false;
-  if (!("message" in action) || typeof action.message !== "string")
+  if (!("message" in action) || typeof action.message !== "string") {
     return false;
+  }
 
   switch (action.message) {
     case "set-difficulty":

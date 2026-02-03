@@ -36,7 +36,7 @@ export function expect<T>(actual: T) {
         if (error instanceof Error) {
           if (error.message !== expectedMessage) {
             throw new Error(
-              `Expected error message "${error.message}" to be "${expectedMessage}"`
+              `Expected error message "${error.message}" to be "${expectedMessage}"`,
             );
           }
         } else {
@@ -45,7 +45,7 @@ export function expect<T>(actual: T) {
       }
       if (!threw) {
         throw new Error(
-          `Expected function to throw an error with message "${expectedMessage}", but it did not throw`
+          `Expected function to throw an error with message "${expectedMessage}", but it did not throw`,
         );
       }
     },
