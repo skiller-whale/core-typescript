@@ -1,33 +1,66 @@
-export default {}; // empty export to ensure the compiler treats this file as a module
-
-const ada = {
-  name: "Ada Loveplaice",
-  species: "Skiller Whale",
-  weightInKg: 3240,
-  likesToEat: "knowledge",
-};
-const charles = {
-  name: "Charles Barbage",
-  species: "Narwhal",
-  weightInKg: 4712,
+type Whale = {
+  name: string;
+  species: string;
+  weightInKg: number;
+  likesToEat: string;
 };
 
-const michael = {
+function whaleGreeting(whale: Whale): string {
+  const intro = `Hi, I'm ${whale.name}.`;
+  const description =
+    "weightInKg" in whale
+      ? `I'm a ${whale.weightInKg}kg ${whale.species}.`
+      : `I'm a ${whale.species}.`;
+  const diet =
+    "likesToEat" in whale ? `I like to eat ${whale.likesToEat}.` : "";
+
+  return [intro, description, diet].filter((part) => part !== "").join(" ");
+}
+
+type RegistrationOptions = {
+  sendWelcomePack: boolean;
+  notifySubscribers: boolean;
+};
+
+function registerWhale(whale: Whale, overrides: RegistrationOptions = {}) {
+  const options: RegistrationOptions = {
+    sendWelcomePack: true,
+    notifySubscribers: false,
+    ...overrides,
+  };
+
+  console.log(`Registering whale: ${whale.name}`);
+  if (options.sendWelcomePack) {
+    console.log(`Sending welcome pack to ${whale.name}`);
+  }
+  if (options.notifySubscribers) {
+    console.log("Sending following notification to subscribers:");
+    console.log(`New whale registered: ${whaleGreeting(whale)}`);
+  }
+  console.log("");
+}
+
+registerWhale(
+  {
+    name: "Ada Loveplaice",
+    species: "Skiller Whale",
+    weightInKg: undefined,
+    likesToEat: "knowledge",
+  },
+  { notifySubscribers: true },
+);
+registerWhale(
+  {
+    name: "Charles Barbage",
+    species: "Narwhal",
+    weightInKg: 4712,
+    likesToEat: undefined,
+  },
+  { sendWelcomePack: false },
+);
+registerWhale({
   name: "Michael Fara-ray",
   species: "Humpback Whale",
   weightInKg: 27500,
   likesToEat: "little and often",
-};
-
-function greeting(whale: any): string {
-  const bits: string[] = [];
-  bits.push(`Hi, I'm ${whale.name},`);
-  bits.push(`I'm a ${whale.weightInKg}kg ${whale.species}`);
-  bits.push("and I like to eat");
-  bits.push(whale.likesToEat);
-  return `${bits.join(" ")}.`;
-}
-
-console.log(greeting(ada));
-console.log(greeting(charles));
-console.log(greeting(michael));
+});
