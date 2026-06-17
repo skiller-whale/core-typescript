@@ -1,6 +1,6 @@
 services:
   sync:
-    image: "ghcr.io/skiller-whale/learnersync:0.2.1"
+    image: "ghcr.io/skiller-whale/learnersync:0.2.7"
     network_mode: "host"
     environment:
       SERVER_URL: "https://train.skillerwhale.com/"
